@@ -1,0 +1,75 @@
+.currency-table {
+    width: 545px;
+    table-layout: fixed;
+    border-collapse: collapse;
+}
+
+.table-header tr {
+    display: block;
+    position: relative;
+}
+
+.table-header tr th {
+    border-style: solid;
+    border-width: 0 1px 1px 0;
+    border-color: white;
+    background-image: linear-gradient(to right, #628f92 0%, #56587e 51%, #deefea 100%);
+    background-size: 200% auto;
+    color: white;
+    text-transform: uppercase;
+    letter-spacing: 4px;
+    font-weight: lighter;
+    padding: 5px;
+    text-align: left;
+}
+
+th:first-child {
+    border-top-left-radius: 10px;
+}
+
+th:last-child {
+    border-top-right-radius: 10px;
+}
+
+.table-body {
+    display: block;
+    overflow-y: auto;
+    max-height: 385px;
+    width: 100%;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+}
+
+td:nth-child(1), th:nth-child(1) {
+    min-width: 125px;
+}
+
+td:nth-child(2), th:nth-child(2) {
+    min-width: 125px;
+}
+
+td:nth-child(3), th:nth-child(3) {
+    min-width: 125px;
+}
+
+td:nth-child(4), th:nth-child(4) {
+    width: 170px;
+}
+
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 20px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #a49ca8;
+    border-radius: 20px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #877684;
+}
