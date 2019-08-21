@@ -1,3 +1,6 @@
+import {differenceInYears, addDays} from 'date-fns';
+import {concat} from 'lodash';
+
 export default class BankService {
 
     _apiBase = 'https://www.nbrb.by/API/ExRates/Rates/Dynamics/';
@@ -13,6 +16,10 @@ export default class BankService {
         143: 'GBP',
         145: 'USD',
     };
+
+    _firstDenominationDate = new Date('2000-01-01');
+
+    _secondDenominationDate = new Date('2016-07-01');
 
     _getResource = async (url) => {
         const res = await fetch(`${this._apiBase}${url}`);
@@ -32,9 +39,37 @@ export default class BankService {
     };
 
     _getRate = async (currId, sD, eD) => {
-        const startDate = `${sD.getFullYear()}-${sD.getMonth() + 1}-${sD.getDate()}`;
-        const endDate = `${eD.getFullYear()}-${eD.getMonth() + 1}-${eD.getDate()}`;
-        const res = await this._getResource(`${currId}?startDate=${startDate}&endDate=${endDate}`);
+        const dateRange = [sD];
+        if (this._firstDenominationDate >= sD && this._firstDenominationDate <= eD) {
+            dateRange.push(this._firstDenominationDate);
+        }
+        if (this._secondDenominationDate >= sD && this._secondDenominationDate <= eD) {
+            dateRange.push(this._secondDenominationDate);
+        }
+        dateRange.push(addDays(eD, 1));
+        const fetchDates = [];
+        for (let i = 0; i < dateRange.length - 1; i += 1) {
+            const fetchNum = differenceInYears(dateRange[i + 1], dateRange[i]);
+            for (let j = 0; j < fetchNum; j += 1) {
+                const startDate = addDays(dateRange[i], j * 365);
+                const endDate = addDays(dateRange[i], (j + 1) * 365 - 1);
+                fetchDates.push({
+                    startDate: `${startDate.getFullYear()}-${startDate.getMonth() + 1}-${startDate.getDate()}`,
+                    endDate: `${endDate.getFullYear()}-${endDate.getMonth() + 1}-${endDate.getDate()}`
+                });
+            }
+            const startDate = addDays(dateRange[i], fetchNum * 365);
+            const endDate = addDays(dateRange[i + 1], -1);
+            fetchDates.push({
+                startDate: `${startDate.getFullYear()}-${startDate.getMonth() + 1}-${startDate.getDate()}`,
+                endDate: `${endDate.getFullYear()}-${endDate.getMonth() + 1}-${endDate.getDate()}`
+            });
+        }
+
+        const res = concat(...await Promise.all(
+            fetchDates.map((prom) => this._getResource(`${currId}?startDate=${prom.startDate}&endDate=${prom.endDate}`))
+        ));
+
         return res.map(this._transformRate);
     };
 

@@ -49,7 +49,7 @@ class PeriodForm extends Component {
                 />
                 <input className='submit'
                        type='submit'
-                       value='Submit'/>
+                       value='Get rates'/>
             </form>
         );
     };

@@ -10,9 +10,9 @@ const RateTable = ({data}) => {
             <thead className='table-header'>
             <tr>
                 <th>Date</th>
-                <th>BYN/USD</th>
-                <th>BYN/GBP</th>
-                <th>BYN/CHF</th>
+                <th>Br/USD</th>
+                <th>Br/GBP</th>
+                <th>Br/CHF</th>
             </tr>
             </thead>
             <tbody className='table-body'>

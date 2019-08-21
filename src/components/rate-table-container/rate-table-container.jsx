@@ -1,6 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import _ from 'lodash';
+import {find, orderBy} from 'lodash';
 
 import Spinner from '../spinner';
 import RateTable from '../rate-table';
@@ -24,11 +24,11 @@ const mapStateToProps = ({loading, USD, GBP, CHF}) => {
                 rDate: usd.rDate,
                 date: usd.date,
                 USD: usd.rate,
-                GBP: _.find(GBP, ['date', usd.date]).rate,
-                CHF: _.find(CHF, ['date', usd.date]).rate
+                GBP: find(GBP, ['date', usd.date]).rate,
+                CHF: find(CHF, ['date', usd.date]).rate
             }];
         });
-        data = _.orderBy(data, ['rDate'], ['asc']);
+        data = orderBy(data, ['rDate'], ['asc']);
     }
     return {loading, data};
 };
