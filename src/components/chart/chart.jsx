@@ -86,7 +86,7 @@ const mapStateToProps = ({loading, USD, GBP, CHF}) => {
                 includeZero: false,
             },
             axisY: {
-                title: 'BYB',
+                title: 'Br',
                 includeZero: false,
             },
             toolTip: {
@@ -125,7 +125,7 @@ const mapStateToProps = ({loading, USD, GBP, CHF}) => {
                 includeZero: false,
             },
             axisY: {
-                title: 'BYR',
+                title: 'Br',
                 includeZero: false,
             },
             toolTip: {
@@ -164,7 +164,7 @@ const mapStateToProps = ({loading, USD, GBP, CHF}) => {
                 includeZero: false,
             },
             axisY: {
-                title: 'BYN',
+                title: 'Br',
                 includeZero: false,
             },
             toolTip: {
