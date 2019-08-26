@@ -4,7 +4,7 @@ import ReactLightCalendar from '@lls/react-light-calendar';
 
 import {compose} from '../../utils';
 import {withBankService} from '../hoc';
-import {rateLoaded, loading} from '../../actions';
+import {ratesLoaded, loading} from '../../actions';
 
 import '@lls/react-light-calendar/dist/index.css';
 
@@ -19,7 +19,7 @@ class PeriodForm extends Component {
 
     onSubmit = (e) => {
         e.preventDefault();
-        const {bankService, rateLoaded, loading} = this.props;
+        const {bankService, ratesLoaded, loading} = this.props;
 
         loading();
 
@@ -30,7 +30,7 @@ class PeriodForm extends Component {
             bankService.getUSD(sD, eD),
             bankService.getGBP(sD, eD),
             bankService.getCHF(sD, eD)
-        ]).then((data) => rateLoaded(data));
+        ]).then((data) => ratesLoaded(data));
     };
 
     onChange = (startDate, endDate) => this.setState({startDate, endDate});
@@ -58,7 +58,7 @@ class PeriodForm extends Component {
 const mapDispatchToProps = (dispatch) => {
     return {
         loading: () => dispatch(loading()),
-        rateLoaded: (data) => dispatch(rateLoaded({USD: data[0], GBP: data[1], CHF: data[2]})),
+        ratesLoaded: (data) => dispatch(ratesLoaded({USD: data[0], GBP: data[1], CHF: data[2]})),
     };
 };
 

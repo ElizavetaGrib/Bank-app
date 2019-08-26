@@ -1,17 +1,23 @@
-const rateLoaded = (rates) => {
+const actionTypes = {
+    RATES_LOADED: 'RATES_LOADED',
+    LOADING: 'LOADING',
+};
+
+const ratesLoaded = (rates) => {
     return {
-        type: 'RATE_LOADED',
+        type: actionTypes.RATES_LOADED,
         payload: rates,
     };
 };
 
 const loading = () => {
     return {
-        type: 'LOADING',
+        type: actionTypes.LOADING,
     }
 };
 
 export {
-    rateLoaded,
+    actionTypes,
+    ratesLoaded,
     loading,
 };

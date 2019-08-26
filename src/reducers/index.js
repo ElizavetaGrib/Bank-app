@@ -1,3 +1,5 @@
+import {actionTypes} from '../actions';
+
 const initialState = {
     USD: null,
     GBP: null,
@@ -7,12 +9,7 @@ const initialState = {
 
 const reducer = (state = initialState, action) => {
     switch (action.type) {
-        case 'LOADING':
-            return {
-                ...state,
-                loading: true,
-            };
-        case 'RATE_LOADED':
+        case actionTypes.RATES_LOADED:
             const {USD, GBP, CHF} = action.payload;
             return {
                 ...state,
@@ -20,6 +17,11 @@ const reducer = (state = initialState, action) => {
                 GBP,
                 CHF,
                 loading: false,
+            };
+        case actionTypes.LOADING:
+            return {
+                ...state,
+                loading: true,
             };
         default:
             return state;
