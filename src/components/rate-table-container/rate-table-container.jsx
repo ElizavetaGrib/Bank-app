@@ -6,13 +6,16 @@ import Spinner from '../spinner';
 import RateTable from '../rate-table';
 
 const RateTableContainer = ({loading, data}) => {
-    const rates = loading ? <Spinner/> : data ? <RateTable data={data}/> : null;
-
-    return (
-        <>
-            {rates}
-        </>
-    );
+    if (loading) {
+        return (
+            <Spinner/>
+        );
+    } else if (data) {
+        return (
+            <RateTable data={data}/>
+        );
+    }
+    return null;
 };
 
 const mapStateToProps = ({loading, USD, GBP, CHF}) => {
@@ -20,15 +23,15 @@ const mapStateToProps = ({loading, USD, GBP, CHF}) => {
     if (USD && GBP && CHF) {
         data = [];
         USD.forEach((usd) => {
-            data = [...data, {
-                rDate: usd.rDate,
+            data.push({
+                msDate: usd.msDate,
                 date: usd.date,
                 USD: usd.rate,
                 GBP: find(GBP, ['date', usd.date]).rate,
-                CHF: find(CHF, ['date', usd.date]).rate
-            }];
+                CHF: find(CHF, ['date', usd.date]).rate,
+            });
         });
-        data = orderBy(data, ['rDate'], ['asc']);
+        data = orderBy(data, ['msDate'], ['asc']);
     }
     return {loading, data};
 };

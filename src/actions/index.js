@@ -13,7 +13,7 @@ const ratesLoaded = (rates) => {
 const loading = () => {
     return {
         type: actionTypes.LOADING,
-    }
+    };
 };
 
 export {

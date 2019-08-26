@@ -20,16 +20,13 @@ class PeriodForm extends Component {
     onSubmit = (e) => {
         e.preventDefault();
         const {bankService, ratesLoaded, loading} = this.props;
-
         loading();
-
-        const sD = new Date(this.state.startDate);
-        const eD = this.state.endDate ? new Date(this.state.endDate) : sD;
-
+        const startDate = new Date(this.state.startDate);
+        const endDate = this.state.endDate ? new Date(this.state.endDate) : startDate;
         Promise.all([
-            bankService.getUSD(sD, eD),
-            bankService.getGBP(sD, eD),
-            bankService.getCHF(sD, eD)
+            bankService.getUSD(startDate, endDate),
+            bankService.getGBP(startDate, endDate),
+            bankService.getCHF(startDate, endDate)
         ]).then((data) => ratesLoaded(data));
     };
 
@@ -45,8 +42,7 @@ class PeriodForm extends Component {
                                     startDate={startDate}
                                     endDate={endDate}
                                     onChange={this.onChange}
-                                    disableDates={(date) => date < new Date('1995-03-29') || date > new Date().setDate(new Date().getDate() + 1)}
-                />
+                                    disableDates={(date) => date < new Date('1995-03-29') || date > new Date().setDate(new Date().getDate() + 1)}/>
                 <input className='submit'
                        type='submit'
                        value='Get rates'/>
