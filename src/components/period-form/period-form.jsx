@@ -1,8 +1,8 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
+import {compose} from 'redux';
 import ReactLightCalendar from '@lls/react-light-calendar';
 
-import {compose} from '../../utils';
 import {withBankService} from '../hoc';
 import {ratesLoaded, loading} from '../../actions';
 
