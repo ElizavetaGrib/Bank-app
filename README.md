@@ -1,8 +1,18 @@
-## To install dependencies you have to run 
+# Bank-app
+
+React app for getting and visualize Br/USD, Br/GBP and Br/CHF rates by dates
+
+## Terms of reference
+
+To read terms of reference open `TOR.pdf`
+
+## How to use
+
+### To install dependencies you have to run 
 
 ### `npm install`
 
-## Available Scripts
+### Available Scripts
 
 In the project directory, you can run:
 
