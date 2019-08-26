@@ -1,7 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import {orderBy, findIndex} from 'lodash';
-import CanvasJSReact from '../../assets/canvasjs.react';
+import CanvasJSReact from '../../../assets/canvasjs.react';
 
 import Spinner from '../spinner';
 
