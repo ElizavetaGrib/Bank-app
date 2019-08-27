@@ -19,7 +19,7 @@ const RateTable = ({data}) => {
             {
                 data.map((rate) => {
                     return (
-                        <RateTableItem key={rate.date} rate={rate}/>
+                        <RateTableItem key={rate.msDate} rate={rate}/>
                     );
                 })
             }
